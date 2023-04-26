@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/icon-calculator2.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Tip calculator app</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="logo-img-box">
+        <img src="images/logo.svg" alt="Splitter logo" />
+      </div>
+      <main>
+        <section class="inputs">
+          <div class="bill-input-box">
+            <div class="bill-label-error">
+              <h1 class="bill-label labels">Bill</h1>
+              <h1 class="error" style="display: none">Can't be zero</h1>
+            </div>
+            <div class="bill-input">
+              <input
+                type="number"
+                class="total field"
+                name="total"
+                placeholder="0.00"
+              />
+            </div>
+          </div>
+          <div class="tips-box">
+            <h1 class="tips-title">Select Tip %</h1>
+            <div class="tips">
+              <button class="percentage">5%</button>
+              <button class="percentage">10%</button>
+              <button class="percentage">15%</button>
+              <button class="percentage">25%</button>
+              <button class="percentage">50%</button>
+              <input class="custom" type="number" placeholder="Custom" />
+            </div>
+          </div>
+          <div class="number-of-people-box">
+            <div class="number-of-people-error">
+              <h1 class="number-of-people-label labels">Number of People</h1>
+              <h1 class="error" style="display: none">Can't be zero</h1>
+            </div>
+            <div class="number-of-people-input">
+              <input
+                type="number"
+                class="number-of-people-total field"
+                name="total"
+                placeholder="0"
+              />
+            </div>
+          </div>
+        </section>
+        <section class="calculation">
+          <div class="tip-per-person">
+            <div class="text">
+              <h1 class="tip-amount">Tip Amount</h1>
+              <h2 class="per">/ person</h2>
+            </div>
+            <div class="result">
+              <p class="tip-calculated-result tip-per">$0.00</p>
+            </div>
+          </div>
+          <div class="total-pay-per">
+            <div class="text">
+              <h1 class="tip-amount">Tip Amount</h1>
+              <h2 class="per">/ person</h2>
+            </div>
+            <div class="result">
+              <p class="tip-calculated-result bill-per">$0.00</p>
+            </div>
+          </div>
+          <button class="reset">Reset</button>
+        </section>
+      </main>
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="#">Ana Izoria</a>.
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
