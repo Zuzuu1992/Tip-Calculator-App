@@ -16,12 +16,9 @@ let tip = 0;
 tipPercentage.forEach((button) => {
   button.addEventListener("click", (event) => {
     tipPercentageValue = parseInt(event.target.innerText);
-    console.log(event.target.innerText);
-    console.log(tipPercentageValue);
     if (tipPercentageValue !== 0) {
       console.log(1);
       if (!button.classList.contains("selected")) {
-        // no button is selected, reset the calculated values
         tipPerPersonCalculated.innerHTML = "$0.00";
         billPerPersonCalculated.innerHTML = "$0.00";
       }
@@ -149,10 +146,6 @@ function calculation() {
     }
   }
 }
-
-// console.log(numberOfPeopleValue);
-// console.log(numberOfPeopleValue.length);
-// console.log(numberOfPeople.value);
 
 function checkInputs() {
   if (
