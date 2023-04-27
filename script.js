@@ -164,7 +164,7 @@ function checkInputs() {
     })
   ) {
     resetButton.classList.remove("turnoff");
-  } else {
+  } else { 
     resetButton.classList.add("turnoff");
   }
 }
