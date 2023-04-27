@@ -16,30 +16,21 @@ let tip = 0;
 tipPercentage.forEach((button) => {
   button.addEventListener("click", (event) => {
     tipPercentageValue = parseInt(event.target.innerText);
-    if (tipPercentageValue !== 0) {
-      console.log(1);
-      if (!button.classList.contains("selected")) {
-        tipPerPersonCalculated.innerHTML = "$0.00";
-        billPerPersonCalculated.innerHTML = "$0.00";
-      }
-      customPercentage.value = "";
+    customPercentage.value = "";
+    calculation();
+    if (button.classList.contains("selected")) {
+      button.classList.remove("selected");
+      tipPercentageValue = 0;
       calculation();
-      if (button.classList.contains("selected")) {
-        button.classList.remove("selected");
-        tipPercentageValue = 0;
-        calculation();
-      } else {
-        button.classList.add("selected");
-        tipPercentage.forEach((remove) => {
-          if (remove !== button && button.classList.contains("selected")) {
-            remove.classList.remove("selected");
-          }
-        });
-      }
-      checkInputs();
     } else {
-      console.log(2);
+      button.classList.add("selected");
+      tipPercentage.forEach((remove) => {
+        if (remove !== button && button.classList.contains("selected")) {
+          remove.classList.remove("selected");
+        }
+      });
     }
+    checkInputs();
   });
 });
 
