@@ -16,67 +16,94 @@ let tip = 0;
 tipPercentage.forEach((button) => {
   button.addEventListener("click", (event) => {
     tipPercentageValue = parseInt(event.target.innerText);
-    customPercentage.value = "";
-    calculation();
-    if (button.classList.contains("selected")) {
-      button.classList.remove("selected");
-      tipPercentageValue = 0;
+    console.log(event.target.innerText);
+    console.log(tipPercentageValue);
+    if (tipPercentageValue !== 0) {
+      console.log(1);
+      if (!button.classList.contains("selected")) {
+        // no button is selected, reset the calculated values
+        tipPerPersonCalculated.innerHTML = "$0.00";
+        billPerPersonCalculated.innerHTML = "$0.00";
+      }
+      customPercentage.value = "";
       calculation();
+      if (button.classList.contains("selected")) {
+        button.classList.remove("selected");
+        tipPercentageValue = 0;
+        calculation();
+      } else {
+        button.classList.add("selected");
+        tipPercentage.forEach((remove) => {
+          if (remove !== button && button.classList.contains("selected")) {
+            remove.classList.remove("selected");
+          }
+        });
+      }
+      checkInputs();
     } else {
-      button.classList.add("selected");
-      tipPercentage.forEach((remove) => {
-        if (remove !== button && button.classList.contains("selected")) {
-          remove.classList.remove("selected");
-        }
-      });
+      console.log(2);
     }
-    checkInputs();
   });
 });
 
 totalBill.addEventListener("input", (event) => {
   totalBillValue = parseInt(event.target.value);
-  if (totalBillValue == 0) {
-    errorMessage[0].style.display = "block";
-    totalBill.style.outline = "2px solid #E17052";
-  } else if (totalBillValue > 0) {
-    totalBill.style.outline = "2px solid #26C2AE";
-    errorMessage[0].style.display = "none";
-    calculation();
-    checkInputs();
+  if (totalBill.value !== "") {
+    if (totalBillValue == 0) {
+      errorMessage[0].style.display = "block";
+      totalBill.style.outline = "2px solid #E17052";
+    } else if (totalBillValue > 0) {
+      totalBill.style.outline = "2px solid #26C2AE";
+      errorMessage[0].style.display = "none";
+      calculation();
+      checkInputs();
+    } else {
+      totalBill.style.outline = "none";
+      errorMessage[0].style.display = "none";
+    }
   } else {
-    totalBill.style.outline = "none";
-    errorMessage[0].style.display = "none";
+    tipPerPersonCalculated.innerHTML = "$0.00";
+    billPerPersonCalculated.innerHTML = "$0.00";
   }
 });
 
 customPercentage.addEventListener("input", (event) => {
   tipPercentageValue = parseInt(event.target.value);
-  if (customPercentage.value == "") {
-    billPerPersonCalculated = "$0.00";
-    tipPerPersonCalculated = "$0.00";
+  if (customPercentage.value !== "") {
+    if (customPercentage.value == "") {
+      billPerPersonCalculated = "$0.00";
+      tipPerPersonCalculated = "$0.00";
+    } else {
+      tipPercentage.forEach((button) => {
+        button.classList.remove("selected");
+      });
+      calculation();
+      checkInputs();
+    }
   } else {
-    tipPercentage.forEach((button) => {
-      button.classList.remove("selected");
-    });
-    calculation();
-    checkInputs();
+    tipPerPersonCalculated.innerHTML = "$0.00";
+    billPerPersonCalculated.innerHTML = "$0.00";
   }
 });
 
 numberOfPeople.addEventListener("input", (event) => {
   numberOfPeopleValue = parseInt(event.target.value);
-  if (numberOfPeopleValue == 0) {
-    errorMessage[1].style.display = "block";
-    numberOfPeople.style.outline = "2px solid #E17052";
-  } else if (numberOfPeopleValue > 0) {
-    numberOfPeople.style.outline = "2px solid #26C2AE";
-    errorMessage[1].style.display = "none";
-    calculation();
-    checkInputs();
+  if (numberOfPeople.value !== "") {
+    if (numberOfPeopleValue == 0) {
+      errorMessage[1].style.display = "block";
+      numberOfPeople.style.outline = "2px solid #E17052";
+    } else if (numberOfPeopleValue > 0) {
+      numberOfPeople.style.outline = "2px solid #26C2AE";
+      errorMessage[1].style.display = "none";
+      calculation();
+      checkInputs();
+    } else {
+      numberOfPeople.style.outline = "none";
+      errorMessage[1].style.display = "none";
+    }
   } else {
-    numberOfPeople.style.outline = "none";
-    errorMessage[1].style.display = "none";
+    tipPerPersonCalculated.innerHTML = "$0.00";
+    billPerPersonCalculated.innerHTML = "$0.00";
   }
 });
 
@@ -100,26 +127,32 @@ function resetEverything() {
 }
 
 function calculation() {
-  total = (
-    (totalBillValue + totalBillValue * (tipPercentageValue / 100)) /
-    numberOfPeopleValue
-  ).toFixed(2);
-  tip = (
-    (totalBillValue * (tipPercentageValue / 100)) /
-    numberOfPeopleValue
-  ).toFixed(2);
-  if (
-    numberOfPeopleValue == 0 ||
-    numberOfPeopleValue.length == 0 ||
-    numberOfPeople.value == ""
-  ) {
-    billPerPersonCalculated.innerText = "$0.00";
-    tipPerPersonCalculated.innerText = "$0.00";
-  } else {
-    billPerPersonCalculated.innerText = `$${total}`;
-    tipPerPersonCalculated.innerText = `$${tip}`;
+  if (tipPercentageValue !== 0) {
+    total = (
+      (totalBillValue + totalBillValue * (tipPercentageValue / 100)) /
+      numberOfPeopleValue
+    ).toFixed(2);
+    tip = (
+      (totalBillValue * (tipPercentageValue / 100)) /
+      numberOfPeopleValue
+    ).toFixed(2);
+    if (
+      numberOfPeopleValue === 0 ||
+      numberOfPeopleValue.length === 0 ||
+      numberOfPeople.value === ""
+    ) {
+      billPerPersonCalculated.innerText = "$0.00";
+      tipPerPersonCalculated.innerText = "$0.00";
+    } else {
+      billPerPersonCalculated.innerText = `$${total}`;
+      tipPerPersonCalculated.innerText = `$${tip}`;
+    }
   }
 }
+
+// console.log(numberOfPeopleValue);
+// console.log(numberOfPeopleValue.length);
+// console.log(numberOfPeople.value);
 
 function checkInputs() {
   if (

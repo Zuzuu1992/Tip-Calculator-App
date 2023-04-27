@@ -29,6 +29,9 @@
             <div class="bill-input">
               <input
                 type="number"
+                min="0"
+                oninput="this.value = 
+                !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
                 class="total field"
                 name="total"
                 placeholder="0.00"
@@ -43,7 +46,13 @@
               <button class="percentage">15%</button>
               <button class="percentage">25%</button>
               <button class="percentage">50%</button>
-              <input class="custom" type="number" placeholder="Custom" />
+              <input
+                class="custom"
+                type="number"
+                oninput="this.value = 
+              !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                placeholder="Custom"
+              />
             </div>
           </div>
           <div class="number-of-people-box">
@@ -55,6 +64,8 @@
               <input
                 type="number"
                 class="number-of-people-total field"
+                oninput="this.value = 
+                !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
                 name="total"
                 placeholder="0"
               />
@@ -73,7 +84,7 @@
           </div>
           <div class="total-pay-per">
             <div class="text">
-              <h1 class="tip-amount">Tip Amount</h1>
+              <h1 class="tip-amount">Total</h1>
               <h2 class="per">/ person</h2>
             </div>
             <div class="result">
